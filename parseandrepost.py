@@ -5,12 +5,13 @@ import config
 
 bot = telebot.TeleBot(config.TOKEN)
 telebot.apihelper.proxy = config.PROXY
+bot.get_chat(config.FROM_GROUP_ID)
 
 
 @bot.message_handler(content_types=["text"])
-def repeat_all_messages(message):
-    # Название функции не играет никакой роли, в принципе
-    if config.KEYWORD in message.text:
+def repost(message):
+    print(message.chat.id)
+    if config.KEYWORD in message.text and str(message.chat.id) == config.FROM_GROUP_ID:
         bot.send_message(config.TO_GROUP_ID, message.text)
 
 
