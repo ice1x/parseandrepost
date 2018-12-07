@@ -10,7 +10,6 @@ bot.get_chat(config.FROM_GROUP_ID)
 
 @bot.message_handler(content_types=["text"])
 def repost(message):
-    print(message.chat.id)
     if config.KEYWORD in message.text and str(message.chat.id) == config.FROM_GROUP_ID:
         bot.send_message(config.TO_GROUP_ID, message.text)
 
